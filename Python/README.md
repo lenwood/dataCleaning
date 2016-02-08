@@ -19,3 +19,6 @@ The benefit of this method of categorization is that it's fast and requires very
 
     searchStrings = search_category_lists.ix[:, 0].tolist()
     categoryStrings = search_category_lists.ix[:, 1].tolist()
+
+#### notInBoth
+Script to identify rows not present in 2 similar data frames. Sample usage included in the script.
