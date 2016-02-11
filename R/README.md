@@ -1,10 +1,5 @@
-<<<<<<< HEAD
 R Data Cleaning Scripts
 =======================
-=======
-Data Cleaning
-===============
->>>>>>> origin/master
 
 Collection of scripts useful for cleaning data in R.
 
