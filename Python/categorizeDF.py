@@ -11,7 +11,7 @@ food = pd.DataFrame(
     })
 
 
-def categorize(df, searchColName, searchList, catList, newColName="Category"):
+def categorizeDF(df, searchColName, searchList, catList, newColName="Category"):
     # Add default category to all rows to begin with
     # this will be the value for unmatched rows
     oList = ['Undefined'] * df.shape[0]
@@ -44,5 +44,5 @@ def categorize(df, searchColName, searchList, catList, newColName="Category"):
     final = final.drop('ID', axis=1)
     return final
 
-print filter(food, 'dish', search, category)
+print categroizeDF(food, 'dish', search, category)
 
