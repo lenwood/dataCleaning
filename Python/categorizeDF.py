@@ -18,7 +18,7 @@ def categorizeDF(df, searchColName, searchList, catList, newColName="Category"):
     df.loc[:, newColName] = oList
 
     # Add ID so that original sequence can be restored
-    df.loc[:, 'ID'] = list(range(1, df.shape[0]+1))
+    df.loc[:, 'ID'] = list(range(1, df.shape[0]+1)) # +1 to account for header row
 
     # create empty dataframe to work with.
     tempDF = pd.DataFrame(columns=list(df.columns.values), index=np.arange(2))
@@ -26,8 +26,8 @@ def categorizeDF(df, searchColName, searchList, catList, newColName="Category"):
     # iterate through the strings
     for ind, val in enumerate(searchList):
         x = df[df[searchColName].str.contains(val, case=False) == True]
-        newness = [catList[ind]] * x.shape[0]
-        x.loc[:, newColName] = newness
+        categoryColumn = [catList[ind]] * x.shape[0]
+        x.loc[:, newColName] = categoryColumn
         tempDF = tempDF.append(x)
 
     # remove NAs that were induced when empty dataframe was created
