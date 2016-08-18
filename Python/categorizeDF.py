@@ -44,5 +44,5 @@ def categorizeDF(df, searchColName, searchList, catList, newColName="Category"):
     final = final.drop('ID', axis=1)
     return final
 
-print categroizeDF(food, 'dish', search, category)
+print categorizeDF(food, 'dish', search, category)
 
