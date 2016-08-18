@@ -1,5 +1,14 @@
 # Quickly categorize a data frame with a column of messy character strings.
 
+search <- c("chicken", "pepperoni", "egg", "cheeseburger", "blt", "omlette")
+
+category <- c("Chicken", "Beef", "Egg", "Beef", "Pork", "Egg")
+
+dish <- c("chicken cordon bleu", "Pepperoni Pizza", "egg salad", "bagel", "GOULASH", "Fried Chicken", "Chili Relleno", "cheeseburger", "BLT", "omlette")
+meal <- c("dinner", "dinner", "lunch", "breakfast", "dinner", "lunch", "dinner", "lunch", "lunch", "breakfast")
+food <- data.frame(dish, meal)
+rm(dish, meal)
+
 categorizeDF <- function(df, searchColName, searchList, catList, newColName="Category") {
   # create empty data frame to hold categories
   catDF <- data.frame(matrix(ncol=ncol(df), nrow=0))
@@ -38,3 +47,5 @@ categorizeDF <- function(df, searchColName, searchList, catList, newColName="Cat
   colnames(catDF)[which(colnames(catDF) == "newCol")] <- newColName
   catDF
 }
+
+sorted <- categorizeDF(food, "dish", search, category, "mainIngredient")
