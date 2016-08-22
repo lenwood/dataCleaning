@@ -6,8 +6,8 @@ search = ["chicken", "pepperoni", "egg", "cheeseburger", "blt", "omlette"]
 category = ["Chicken", "Beef", "Egg", "Beef", "Pork", "Egg"]
 
 food = pd.DataFrame(
-    {'dish' : ["chicken cordon bleu", "kaese spaetzle", "Pepperoni Pizza", "egg salad", "bagel", "GOULASH", "Fried Chicken", "Chili Relleno", "cheeseburger", "BLT", "omlette"],
-     'meal' : ["dinner", "dinner", np.nan, "lunch", "breakfast", "dinner", "lunch", "dinner", "lunch", "lunch", "breakfast"] 
+    {'dish' : ["chicken cordon bleu", "Pepperoni Pizza", "egg salad", "kaese spaetzle", "bagel", "GOULASH", "Fried Chicken", "Chili Relleno", "cheeseburger", np.nan, "BLT", "omlette"],
+     'meal' : ["dinner", "dinner", "lunch", np.nan, "breakfast", "dinner", "lunch", "dinner", "lunch", np.nan, "lunch", "breakfast"] 
     })
 
 
