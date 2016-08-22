@@ -4,8 +4,8 @@ search <- c("chicken", "pepperoni", "egg", "cheeseburger", "blt", "omlette")
 
 category <- c("Chicken", "Beef", "Egg", "Beef", "Pork", "Egg")
 
-dish <- c("chicken cordon bleu", "Pepperoni Pizza", "egg salad", "bagel", "GOULASH", "Fried Chicken", "Chili Relleno", "cheeseburger", "BLT", "omlette")
-meal <- c("dinner", "dinner", "lunch", "breakfast", "dinner", "lunch", "dinner", "lunch", "lunch", "breakfast")
+dish <- c("chicken cordon bleu", "Pepperoni Pizza", "egg salad", "kaeze spaetzle", "bagel", "GOULASH", "Fried Chicken", "Chili Relleno", "cheeseburger", NA, "BLT", "omlette")
+meal <- c("dinner", "dinner", "lunch", NA, "breakfast", "dinner", "lunch", "dinner", "lunch", NA, "lunch", "breakfast")
 food <- data.frame(dish, meal)
 rm(dish, meal)
 
