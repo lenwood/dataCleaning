@@ -6,8 +6,8 @@ search = ["chicken", "pepperoni", "egg", "cheeseburger", "blt", "omlette"]
 category = ["Chicken", "Beef", "Egg", "Beef", "Pork", "Egg"]
 
 food = pd.DataFrame(
-    {'dish' : ["chicken cordon bleu", "Pepperoni Pizza", "egg salad", "bagel", "GOULASH", "Fried Chicken", "Chili Relleno", "cheeseburger", "BLT", "omlette"],
-     'meal' : ["dinner", "dinner", "lunch", "breakfast", "dinner", "lunch", "dinner", "lunch", "lunch", "breakfast"] 
+    {'dish' : ["chicken cordon bleu", "kaese spaetzle", "Pepperoni Pizza", "egg salad", "bagel", "GOULASH", "Fried Chicken", "Chili Relleno", "cheeseburger", "BLT", "omlette"],
+     'meal' : ["dinner", "dinner", np.nan, "lunch", "breakfast", "dinner", "lunch", "dinner", "lunch", "lunch", "breakfast"] 
     })
 
 
@@ -31,7 +31,7 @@ def categorizeDF(df, searchColName, searchList, catList, newColName="Category"):
         tempDF = tempDF.append(x)
 
     # remove NAs that were induced when empty dataframe was created
-    clean = tempDF.dropna(axis=0)
+    clean = tempDF.dropna(axis=0, how='all')
 
     # merge the orginal and newly categorized dataframes
     final = df.append(clean)
