@@ -21,10 +21,12 @@ categorizeDF <- function(df, searchColName, searchList, catList, newColName="Cat
   for (i in seq_along(searchList)) {
     rownames(df) <- NULL
     index <- grep(searchList[i], df[,which(colnames(df) == searchColName)], ignore.case=TRUE)
-    tempDF <- df[index,]
-    tempDF$newCol <- catList[i]
-    catDF <- rbind(catDF, tempDF)
-    df <- df[-index,]
+    if (length(index) > 0) {
+      tempDF <- df[index,]
+      tempDF$newCol <- catList[i]
+      catDF <- rbind(catDF, tempDF)
+      df <- df[-index,]
+    }
   }
 
   # OTHER category for unmatched rows
