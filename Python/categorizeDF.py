@@ -1,20 +1,36 @@
+#!/usr/bin/env python 3.6
+
 import pandas as pd
 import numpy as np
+
+def typeChanger(s):
+    if isinstance(s, (bytes, bytearray)):
+        try:
+            newS = s.decode('utf-8')
+        except AttributeError:
+            newS = s
+    elif isinstance(s, str):
+        try:
+            newS = s.encode('utf-8')
+        except AttributeError:
+            newS = s
+    else:
+        newS = s
+    return newS
 
 search = ["chicken", "pepperoni", "egg", "cheeseburger", "blt", "omlette"]
 
 category = ["Chicken", "Beef", "Egg", "Beef", "Pork", "Egg"]
 
 food = pd.DataFrame(
-    {'dish' : ["chicken cordon bleu", "Pepperoni Pizza", "egg salad", "kaese spaetzle", "bagel", "GOULASH", "Fried Chicken", "Chili Relleno", "cheeseburger", np.nan, "BLT", "omlette"],
-     'meal' : ["dinner", "dinner", "lunch", np.nan, "breakfast", "dinner", "lunch", "dinner", "lunch", np.nan, "lunch", "breakfast"] 
+    {'dish' : ["chicken cordon bleu", b"Pepperoni Pizza", "", b"egg salad", "kaese spaetzle", "bagel", "GOULASH", b"Fried Chicken", "Chili Relleno", "cheeseburger", np.nan, "BLT", "omlette"],
+     'meal' : ["dinner", "dinner", "", "lunch", np.nan, "breakfast", "dinner", "lunch", "dinner", "lunch", np.nan, "lunch", "breakfast"] 
     })
 
-
-def categorizeDF(df, searchColName, searchList, catList, newColName="Category"):
+def categorizeDF(df, searchColName, searchList, catList, newColName="Category", undefined="Undefined"):
     # Add default category to all rows to begin with
     # this will be the value for unmatched rows
-    oList = ['Undefined'] * df.shape[0]
+    oList = [undefined] * df.shape[0]
     df.loc[:, newColName] = oList
 
     # Add ID so that original sequence can be restored
@@ -36,6 +52,14 @@ def categorizeDF(df, searchColName, searchList, catList, newColName="Category"):
     # merge the orginal and newly categorized dataframes
     final = df.append(clean)
 
+    retry = final[final[newColName] == undefined]
+
+    invertedSearchList = [typeChanger(x) for x in searchList]
+
+    for ind, val in enumerate(invertedSearchList):
+        x = retry[retry[searchColName].str.contains(val, case=False) == True]
+        final.set_value(x.index, newColName, catList[ind])
+
     # remove duplicate rows
     final = final.drop_duplicates(subset='ID', keep='last')
 
@@ -44,5 +68,4 @@ def categorizeDF(df, searchColName, searchList, catList, newColName="Category"):
     final = final.drop('ID', axis=1)
     return final
 
-print categorizeDF(food, 'dish', search, category)
-
+catTest = categorizeDF(food, 'dish', search, category)
